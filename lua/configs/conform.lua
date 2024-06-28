@@ -1,12 +1,12 @@
 local options = {
-  lsp_fallback = true,
+  lsp_fallback = false,
 
   formatters_by_ft = {
     lua = { "stylua" },
 
     yml = { { "prettierd", "prettier" } },
     toml = { { "prettierd", "prettier" } },
-    json = { { "prettierd", "prettier" } },
+    json = { "prettierd" },
     typescript = { { "prettierd", "prettier" } },
     javascript = { { "prettierd", "prettier" } },
     tsx = { { "prettierd", "prettier" } },
