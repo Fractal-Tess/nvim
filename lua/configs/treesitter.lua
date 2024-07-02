@@ -32,9 +32,6 @@ local opts = {
   autopairs = {
     enable = true,
   },
-  autotag = {
-    enable = true,
-  },
 }
 
 return opts

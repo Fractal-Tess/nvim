@@ -20,20 +20,27 @@ return {
   -- Syntax highlighting
   {
     "nvim-treesitter/nvim-treesitter",
-    dependencies = {
-      { "windwp/nvim-ts-autotag" },
-    },
     opts = require "configs.treesitter",
   },
 
+  -- Auto closing tags
+  {
+    "windwp/nvim-ts-autotag",
+    dependencies = "nvim-treesitter/nvim-treesitter",
+    event = "VeryLazy",
+    config = function()
+      require("nvim-ts-autotag").setup()
+    end,
+  },
+
   -- Better escaping
-  -- {
-  --   "max397574/better-escape.nvim",
-  --   event = "InsertEnter",
-  --   config = function()
-  --     require("better_escape").setup()
-  --   end,
-  -- },
+  {
+    "max397574/better-escape.nvim",
+    lazy = false,
+    config = function()
+      require("better_escape").setup()
+    end,
+  },
 
   -- Copilot
   {
@@ -45,6 +52,26 @@ return {
     config = function()
       require "configs.copilot"
     end,
+  },
+
+  {
+    "kdheepak/lazygit.nvim",
+    cmd = {
+      "LazyGit",
+      "LazyGitConfig",
+      "LazyGitCurrentFile",
+      "LazyGitFilter",
+      "LazyGitFilterCurrentFile",
+    },
+    -- optional for floating window border decoration
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+    },
+    -- setting the keybinding for LazyGit with 'keys' is recommended in
+    -- order to load the plugin when the command is run for the first time
+    keys = {
+      { "<leader>lg", "<cmd>LazyGit<cr>", desc = "LazyGit" },
+    },
   },
 
   -- {
@@ -96,15 +123,6 @@ return {
   --   main = "ibl",
   --   opts = function()
   --     return require "configs.blank-line"
-  --   end,
-  -- },
-
-  -- Auto closing tags
-  -- {
-  --   "windwp/nvim-ts-autotag",
-  --   dependencies = "nvim-treesitter/nvim-treesitter",
-  --   config = function()
-  --     require "configs.ts-autotag"
   --   end,
   -- },
 }
