@@ -22,6 +22,19 @@ local opts = {
     "ron",
     "c",
   },
+
+  highlight = {
+    enable = true,
+  },
+  indent = {
+    enable = true,
+  },
+  autopairs = {
+    enable = true,
+  },
+  autotag = {
+    enable = true,
+  },
 }
 
 return opts
