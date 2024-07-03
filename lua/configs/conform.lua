@@ -9,7 +9,7 @@ local options = {
     json = { "prettierd" },
     typescript = { { "prettierd", "prettier" } },
     javascript = { { "prettierd", "prettier" } },
-    tsx = { { "prettierd", "prettier" } },
+    typescriptreact = { { "prettierd", "prettier" } },
     css = { { "prettierd", "prettier" } },
     html = { { "prettierd", "prettier" } },
 
@@ -39,7 +39,7 @@ local options = {
   format_on_save = {
     -- These options will be passed to conform.format()
     timeout_ms = 500,
-    lsp_fallback = true,
+    lsp_fallback = false,
   },
 }
 
