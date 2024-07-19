@@ -5,6 +5,7 @@ local options = {
     lua = { "stylua" },
 
     yml = { { "prettierd", "prettier" } },
+    svelte = { { "prettierd", "prettier" } },
     toml = { { "prettierd", "prettier" } },
     json = { "prettierd" },
     typescript = { { "prettierd", "prettier" } },

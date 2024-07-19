@@ -19,16 +19,36 @@ local servers = {
   "csharp_ls", -- dotnet sdk
   "jsonls", -- json
   "sqls", -- sql
-  "phpactor", -- php
+  -- "phpactor", -- php,
+  "phan", -- php
 }
 
 -- lsps with default config
 for _, lsp in ipairs(servers) do
-  lspconfig[lsp].setup {
-    on_attach = on_attach,
-    on_init = on_init,
-    capabilities = capabilities,
-  }
+  if lsp == "tailwindcss" then
+    lspconfig[lsp].setup {
+      on_attach = on_attach,
+      on_init = on_init,
+      capabilities = capabilities,
+      settings = {
+        tailwindCSS = {
+          experimental = {
+            classRegex = {
+              { "cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]" },
+              { "cx\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)" },
+              { "cn\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)" },
+            },
+          },
+        },
+      },
+    }
+  else
+    lspconfig[lsp].setup {
+      on_attach = on_attach,
+      on_init = on_init,
+      capabilities = capabilities,
+    }
+  end
 end
 
 -- typescript
