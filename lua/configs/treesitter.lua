@@ -2,6 +2,7 @@ local opts = {
   ensure_installed = {
     "lua",
     "vim",
+    "nginx",
 
     "svelte",
     "astro",
