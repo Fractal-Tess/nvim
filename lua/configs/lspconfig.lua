@@ -4,6 +4,7 @@ local servers = {
   biome = {},
   html = {},
   cssls = {},
+  gopls = {},
   docker_compose_language_service = {},
   dockerls = {},
   clangd = {},

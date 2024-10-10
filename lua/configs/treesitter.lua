@@ -3,6 +3,7 @@ local opts = {
     "lua",
     "vim",
     "nginx",
+    "go",
 
     "svelte",
     "astro",
