@@ -13,10 +13,12 @@ if &shortmess =~ 'A'
 else
   set shortmess=aoO
 endif
+badd +48 ~/.config/nvim/lua/configs/treesitter.lua
+badd +60 ~/.config/nvim/lua/options.lua
 argglobal
 %argdel
+edit ~/.config/nvim/lua/configs/treesitter.lua
 argglobal
-enew
 setlocal fdm=expr
 setlocal fde=v:lua.vim.treesitter.foldexpr()
 setlocal fmr={{{,}}}
@@ -25,6 +27,12 @@ setlocal fdl=5
 setlocal fml=1
 setlocal fdn=5
 setlocal fen
+let s:l = 1 - ((0 * winheight(0) + 26) / 52)
+if s:l < 1 | let s:l = 1 | endif
+keepjumps exe s:l
+normal! zt
+keepjumps 1
+normal! 0
 tabnext 1
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0 && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
   silent exe 'bwipe ' . s:wipebuf

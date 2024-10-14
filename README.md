@@ -11,4 +11,5 @@
 ## TODOS
 * [ ] - Setup C# lsp and workflow
 * [ ] - Setup nodejs debugger
+* [ ] - Add php blade template support
 
