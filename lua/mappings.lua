@@ -3,7 +3,7 @@
 -----------------------------------------------------------
 
 -- Load NvChad default mappings
-require("nvchad.mappings")
+require "nvchad.mappings"
 
 -- Utility function for cleaner mapping definitions
 local map = vim.keymap.set
@@ -31,33 +31,33 @@ map("i", "jk", "<ESC>", { desc = "Exit insert mode" })
   Alt + t: Toggle suggestion auto-trigger
 --]]
 
-map("i", "<A-l>", function()
-    if require("copilot.suggestion").is_visible() then
-        require("copilot.suggestion").accept()
-    end
-end, { desc = "Copilot accept suggestion" })
-
-map("i", "<A-n>", function()
-    if require("copilot.suggestion").is_visible() then
-        require("copilot.suggestion").next()
-    end
-end, { desc = "Copilot next suggestion" })
-
-map("i", "<A-p>", function()
-    if require("copilot.suggestion").is_visible() then
-        require("copilot.suggestion").prev()
-    end
-end, { desc = "Copilot previous suggestion" })
-
-map("i", "<A-d>", function()
-    if require("copilot.suggestion").is_visible() then
-        require("copilot.suggestion").dismiss()
-    end
-end, { desc = "Copilot dismiss suggestion" })
-
-map("i", "<A-t>", function()
-    require("copilot.suggestion").toggle_auto_trigger()
-end, { desc = "Copilot toggle suggestions" })
+-- map("i", "<A-l>", function()
+--     if require("copilot.suggestion").is_visible() then
+--         require("copilot.suggestion").accept()
+--     end
+-- end, { desc = "Copilot accept suggestion" })
+--
+-- map("i", "<A-n>", function()
+--     if require("copilot.suggestion").is_visible() then
+--         require("copilot.suggestion").next()
+--     end
+-- end, { desc = "Copilot next suggestion" })
+--
+-- map("i", "<A-p>", function()
+--     if require("copilot.suggestion").is_visible() then
+--         require("copilot.suggestion").prev()
+--     end
+-- end, { desc = "Copilot previous suggestion" })
+--
+-- map("i", "<A-d>", function()
+--     if require("copilot.suggestion").is_visible() then
+--         require("copilot.suggestion").dismiss()
+--     end
+-- end, { desc = "Copilot dismiss suggestion" })
+--
+-- map("i", "<A-t>", function()
+--     require("copilot.suggestion").toggle_auto_trigger()
+-- end, { desc = "Copilot toggle suggestions" })
 
 -----------------------------------------------------------
 -- Line Movement
