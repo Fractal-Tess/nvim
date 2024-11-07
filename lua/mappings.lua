@@ -1,58 +1,102 @@
-require "nvchad.mappings"
+-----------------------------------------------------------
+-- Key Mappings Configuration
+-----------------------------------------------------------
 
--- add yours here
+-- Load NvChad default mappings
+require("nvchad.mappings")
 
+-- Utility function for cleaner mapping definitions
 local map = vim.keymap.set
 
+-----------------------------------------------------------
+-- General Mappings
+-----------------------------------------------------------
+
+-- Enter command mode with semicolon
 map("n", ";", ":", { desc = "CMD enter command mode" })
-map("i", "jk", "<ESC>")
 
--- map({ "n", "i", "v" }, "<C-s>", "<cmd> w <cr>")
+-- Quick escape from insert mode
+map("i", "jk", "<ESC>", { desc = "Exit insert mode" })
 
--- Copilot
-map("i", "<A-l>", function() -- Accept suggestion
-  if require("copilot.suggestion").is_visible() then
-    require("copilot.suggestion").accept()
-  end
-end, { desc = "Copilot accapet" })
+-----------------------------------------------------------
+-- Copilot Integration
+-----------------------------------------------------------
 
-map("i", "<A-n>", function() -- Next suggestion
-  if require("copilot.suggestion").is_visible() then
-    require("copilot.suggestion").next()
-  end
+--[[
+  Copilot keybindings for AI-assisted coding
+  Alt + l: Accept current suggestion
+  Alt + n: View next suggestion
+  Alt + p: View previous suggestion
+  Alt + d: Dismiss current suggestion
+  Alt + t: Toggle suggestion auto-trigger
+--]]
+
+map("i", "<A-l>", function()
+    if require("copilot.suggestion").is_visible() then
+        require("copilot.suggestion").accept()
+    end
+end, { desc = "Copilot accept suggestion" })
+
+map("i", "<A-n>", function()
+    if require("copilot.suggestion").is_visible() then
+        require("copilot.suggestion").next()
+    end
 end, { desc = "Copilot next suggestion" })
 
-map("i", "<A-p>", function() -- Previous suggestion
-  if require("copilot.suggestion").is_visible() then
-    require("copilot.suggestion").prev()
-  end
+map("i", "<A-p>", function()
+    if require("copilot.suggestion").is_visible() then
+        require("copilot.suggestion").prev()
+    end
 end, { desc = "Copilot previous suggestion" })
 
-map("i", "<A-d>", function() -- Dismiss suggestion
-  if require("copilot.suggestion").is_visible() then
-    require("copilot.suggestion").dismiss()
-  end
+map("i", "<A-d>", function()
+    if require("copilot.suggestion").is_visible() then
+        require("copilot.suggestion").dismiss()
+    end
 end, { desc = "Copilot dismiss suggestion" })
 
-map("i", "<A-t>", function() -- Toggle suggestions
-  require("copilot.suggestion").toggle_auto_trigger()
+map("i", "<A-t>", function()
+    require("copilot.suggestion").toggle_auto_trigger()
 end, { desc = "Copilot toggle suggestions" })
 
--- Move lines
-map("n", "<A-k>", ":m .-2<CR>==", { desc = "Move line up" }) -- Move line up
-map("n", "<A-j>", ":m .+1<CR>==", { desc = "Move line down" }) -- Move line down
+-----------------------------------------------------------
+-- Line Movement
+-----------------------------------------------------------
 
-map("i", "<A-k>", "<Esc>:m .-2<CR>==gi", { desc = "Move line up" }) -- Move line up
-map("i", "<A-j>", "<Esc>:m .+1<CR>==gi", { desc = "Move line down" }) -- Move line down
+--[[
+  Quick line movement in different modes:
+  Alt + j: Move line down
+  Alt + k: Move line up
+  
+  These mappings work in normal, insert, and visual modes
+--]]
 
-map("v", "<A-k>", ":m '<-2<CR>gv=gv", { desc = "Move line up" }) -- Move line up
-map("v", "<A-j>", ":m '>+1<CR>gv=gv", { desc = "Move line down" }) -- Move line down
+-- Normal mode line movement
+map("n", "<A-k>", ":m .-2<CR>==", { desc = "Move line up" })
+map("n", "<A-j>", ":m .+1<CR>==", { desc = "Move line down" })
 
--- Project management
+-- Insert mode line movement
+map("i", "<A-k>", "<Esc>:m .-2<CR>==gi", { desc = "Move line up" })
+map("i", "<A-j>", "<Esc>:m .+1<CR>==gi", { desc = "Move line down" })
+
+-- Visual mode line movement
+map("v", "<A-k>", ":m '<-2<CR>gv=gv", { desc = "Move line up" })
+map("v", "<A-j>", ":m '>+1<CR>gv=gv", { desc = "Move line down" })
+
+-----------------------------------------------------------
+-- Project Management
+-----------------------------------------------------------
+
+--[[
+  ProjectMgr keybindings:
+  <leader>pp: Open ProjectMgr window
+  
+  When ProjectMgr window is open:
+  <CR>        - Open the project under cursor
+  <C-a>       - Add a project (prompts for name, path, and optional commands)
+  <C-d>/<C-x> - Delete project under cursor
+  <C-e>/<C-u> - Edit the project under cursor
+  <C-q>/<ESC> - Close the window
+--]]
+
 map("n", "<leader>pp", ":ProjectMgr<CR>", { desc = "ProjectMgr window" })
--- Once this is open, you can use the following keybindings:
--- <CR>	Open the project under your cursor
--- <C-a>	Add a project. You will be asked for a name, a path, and optionally startup and shutdown commands.
--- <C-d> / <C-x>	Delete project under your cursor
--- <C-e> / <C-u>	Edit the project under your cursor
--- <C-q> / <ESC>	Close the window without doing anything

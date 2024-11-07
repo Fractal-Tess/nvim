@@ -1,62 +1,89 @@
+-----------------------------------------------------------
+-- Treesitter Configuration
+-----------------------------------------------------------
+
+-- Register MDX as markdown for proper highlighting
 vim.treesitter.language.register("markdown", "mdx")
+
+-----------------------------------------------------------
+-- Custom Parser Configurations
+-----------------------------------------------------------
 
 local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
 
+-- Laravel Blade template parser
 parser_config.blade = {
-  install_info = {
-    url = "https://github.com/EmranMR/tree-sitter-blade",
-    files = { "src/parser.c" },
-    branch = "main",
-  },
-  filetype = "blade",
+    install_info = {
+        url = "https://github.com/EmranMR/tree-sitter-blade",
+        files = { "src/parser.c" },
+        branch = "main",
+    },
+    filetype = "blade",
 }
 
-vim.filetype.add {
-  extension = {
-    mdx = "mdx",
-  },
-  pattern = {
-    [".*%.blade%.php"] = "blade",
-  },
-}
+-----------------------------------------------------------
+-- File Type Associations
+-----------------------------------------------------------
+
+vim.filetype.add({
+    extension = {
+        mdx = "mdx",
+    },
+    pattern = {
+        [".*%.blade%.php"] = "blade",
+    },
+})
+
+-----------------------------------------------------------
+-- Treesitter Options
+-----------------------------------------------------------
 
 local opts = {
-  ensure_installed = {
-    "lua",
-    "vim",
-    "nginx",
-    "go",
+    -- Languages to install
+    ensure_installed = {
+        -- System and Configuration
+        "lua",
+        "vim",
+        "nginx",
+        "yaml",
+        "ron",
+        
+        -- Web Development
+        "html",
+        "css",
+        "javascript",
+        "typescript",
+        "tsx",
+        "json",
+        "xml",
+        "svelte",
+        "astro",
+        
+        -- Backend Development
+        "php",
+        "blade",
+        "sql",
+        "go",
+        "c_sharp",
+        "c",
+        
+        -- Documentation
+        "markdown",
+        "markdown_inline",
+    },
 
-    "svelte",
-    "astro",
-    "html",
-    "tsx",
-    "css",
-    "xml",
-    "json",
-    "javascript",
-    "typescript",
-    "php",
-    "markdown",
-    "markdown_inline",
-
-    "c_sharp",
-    "sql",
-    "yaml",
-    "ron",
-    "c",
-    "blade",
-  },
-
-  highlight = {
-    enable = true,
-  },
-  indent = {
-    enable = true,
-  },
-  autopairs = {
-    enable = true,
-  },
+    -- Feature Configuration
+    highlight = {
+        enable = true,  -- Enable syntax highlighting
+    },
+    
+    indent = {
+        enable = true,  -- Enable indentation support
+    },
+    
+    autopairs = {
+        enable = true,  -- Enable automatic pairs
+    },
 }
 
 return opts

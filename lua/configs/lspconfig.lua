@@ -1,74 +1,101 @@
--- load defaults i.e lua_lsp
+-----------------------------------------------------------
+-- LSP Configuration
+-----------------------------------------------------------
+
+-- Load NvChad LSP defaults
 require("nvchad.configs.lspconfig").defaults()
 
-local lspconfig = require "lspconfig"
-local nvlsp = require "nvchad.configs.lspconfig"
+local lspconfig = require("lspconfig")
+local nvlsp = require("nvchad.configs.lspconfig")
+
+-----------------------------------------------------------
+-- Language Server Configurations
+-----------------------------------------------------------
 
 local servers = {
-  -- HTML
-  emmet_language_server = {},
-  html = {},
-
-  -- CSS
-  cssls = {},
-
-  -- Js frameworks
-  svelte = {},
-  astro = {},
-  tailwindcss = {
-    settings = {
-      tailwindCSS = {
-        experimental = {
-          classRegex = {
-            { "cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]" },
-            { "cx\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)" },
-            { "cn\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)" },
-          },
+    -----------------------------------------------------------
+    -- Web Development
+    -----------------------------------------------------------
+    -- HTML & CSS
+    emmet_language_server = {},
+    html = {},
+    cssls = {},
+    
+    -- JavaScript & Frameworks
+    svelte = {},
+    astro = {},
+    
+    -- Tailwind CSS
+    tailwindcss = {
+        settings = {
+            tailwindCSS = {
+                experimental = {
+                    classRegex = {
+                        { "cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]" },
+                        { "cx\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)" },
+                        { "cn\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)" },
+                    },
+                },
+            },
         },
-      },
     },
-  },
+    
+    -- JSON & Linting
+    jsonls = {},
+    eslint = {},
 
-  -- JSON
-  jsonls = {},
-  -- Eslint
-  eslint = {},
+    -----------------------------------------------------------
+    -- DevOps & Infrastructure
+    -----------------------------------------------------------
+    -- Docker
+    docker_compose_language_service = {},
+    dockerls = {},
+    
+    -- Server Configuration
+    nginx_language_server = {},
 
-  -- Docker
-  docker_compose_language_service = {},
-  dockerls = {},
+    -----------------------------------------------------------
+    -- Systems Programming
+    -----------------------------------------------------------
+    -- Rust
+    rust_analyzer = {},
+    
+    -- C/C++
+    clangd = {},
+    
+    -- Go
+    gopls = {},
 
-  -- Nginx
-  nginx_language_server = {},
+    -----------------------------------------------------------
+    -- Scripting & Configuration
+    -----------------------------------------------------------
+    -- Lua
+    lua_ls = {},
+    
+    -- Nix
+    nixd = {},
+    
+    -- C# (currently disabled)
+    -- csharp_ls = {},
 
-  -- Rust
-  rust_analyzer = {},
-
-  -- Clang (c/c++)
-  clangd = {},
-
-  -- Go
-  gopls = {},
-
-  -- Lua
-  lua_ls = {},
-
-  -- Nix
-  nixd = {},
-
-  -- C#
-  -- csharp_ls = {},
-
-  -- SQL
-  sqls = {},
-
-  -- PHP
-  phpactor = {},
+    -----------------------------------------------------------
+    -- Database & Backend
+    -----------------------------------------------------------
+    -- SQL
+    sqls = {},
+    
+    -- PHP
+    phpactor = {},
 }
 
+-----------------------------------------------------------
+-- Apply Server Configurations
+-----------------------------------------------------------
+
+-- Iterate through servers and apply common configuration
 for name, opts in pairs(servers) do
-  opts.on_init = nvlsp.on_init
-  opts.on_attach = nvlsp.on_attach
-  opts.capabilities = nvlsp.capabilities
-  lspconfig[name].setup(opts)
+    opts.on_init = nvlsp.on_init
+    opts.on_attach = nvlsp.on_attach
+    opts.capabilities = nvlsp.capabilities
+    lspconfig[name].setup(opts)
 end
