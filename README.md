@@ -1,15 +1,19 @@
-**This repo is supposed to used as config by NvChad users!**
+# NvChad User Config
 
-- The main nvchad repo (NvChad/NvChad) is used as a plugin by this repo.
-- So you just import its modules , like `require "nvchad.options" , require "nvchad.mappings"`
-- So you can delete the .git from this repo ( when you clone it locally ) or fork it :)
+This repository is intended to be used as a configuration by NvChad users.
 
-# Credits
+## Overview
 
-1) Lazyvim starter https://github.com/LazyVim/starter as nvchad's starter was inspired by Lazyvim's . It made a lot of things easier!
+- The main NvChad repository (`NvChad/NvChad`) is used as a plugin by this repo.
+- Users can import NvChad's modules, such as `require "nvchad.options"` and `require "nvchad.mappings"`.
+- When cloning this repo locally, users can delete the `.git` directory or fork the repository.
 
-## TODOS
-* [ ] - Setup C# lsp and workflow
-* [ ] - Setup nodejs debugger
-* [ ] - Add php blade template support
+## Credits
 
+1. The NvChad starter was inspired by the [LazyVim starter](https://github.com/LazyVim/starter), which made many things easier.
+
+## TODO
+
+- [ ] Set up C# LSP and workflow
+- [ ] Set up Node.js debugger
+- [ ] Add PHP Blade template support
