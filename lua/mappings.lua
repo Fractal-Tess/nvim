@@ -60,6 +60,16 @@ map("i", "jk", "<ESC>", { desc = "Exit insert mode" })
 -- end, { desc = "Copilot toggle suggestions" })
 
 -----------------------------------------------------------
+-- SuperMaven Integration
+-----------------------------------------------------------
+
+--[[
+  SuperMaven keybindings:
+  Tab: Check and accept SuperMaven completion if available
+      otherwise behave as regular Tab
+--]]
+
+-----------------------------------------------------------
 -- Line Movement
 -----------------------------------------------------------
 
