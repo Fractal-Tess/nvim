@@ -7,6 +7,7 @@ require "nvchad.mappings"
 
 -- Utility function for cleaner mapping definitions
 local map = vim.keymap.set
+local nomap = vim.keymap.noremap
 
 -----------------------------------------------------------
 -- General Mappings

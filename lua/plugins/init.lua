@@ -135,44 +135,46 @@ return {
   --
 
   -- Supermaven
-  {
-    "supermaven-inc/supermaven-nvim",
-    lazy = false,
-    config = function()
-      require("supermaven-nvim").setup {
-        color = {
-          suggestion_color = "#f38ba8",
-          cterm = 244,
-        },
-      }
-    end,
-  },
-
+  -- {
+  --   "supermaven-inc/supermaven-nvim",
+  --   lazy = false,
+  --   config = function()
+  --     require("supermaven-nvim").setup {
+  --       color = {
+  --         suggestion_color = "#f38ba8",
+  --         cterm = 244,
+  --       },
+  --     }
+  --   end,
+  -- },
+  --
   -- Avante AI
   {
     "yetone/avante.nvim",
     event = "VeryLazy",
-    lazy = false,
-    version = false, -- set this if you want to always pull the latest change
+    version = false, -- Never set this value to "*"! Never!
     opts = {
-      -- TODO: Try 4o-mini
+      -- add any opts here
+      -- for example
       provider = "claude",
       auto_suggestions_provider = "claude",
       claude = {
         endpoint = "https://api.anthropic.com",
-        model = "claude-3-5-sonnet-latest",
-        -- model = "claude-3-5-haiku-latest",
+        model = "claude-3-7-sonnet-latest",
         temperature = 0,
-        max_tokens = 4096,
+        max_tokens = 8192,
+        --reasoning_effort = "medium", -- low|medium|high, only used for reasoning models
       },
-      -- Anthropic API configuration
-      behaviour = {
-        auto_suggestions = false, -- Experimental stage ( 24-11-2024 - very slow)
-        auto_set_highlight_group = true,
-        auto_set_keymaps = true,
-        auto_apply_diff_after_generation = false,
-        support_paste_from_clipboard = false,
-        minimize_diff = true, -- Whether to remove unchanged lines when applying a code block
+      mappings = {
+        suggestion = {
+          accept = "<M-l>",
+          next = "<M-]>",
+          prev = "<M-[>",
+          dismiss = "<C-]>",
+        },
+      },
+      behavior = {
+        auto_suggestions = false, -- Experimental stage
       },
     },
     -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
@@ -184,6 +186,10 @@ return {
       "nvim-lua/plenary.nvim",
       "MunifTanjim/nui.nvim",
       --- The below dependencies are optional,
+      "echasnovski/mini.pick", -- for file_selector provider mini.pick
+      "nvim-telescope/telescope.nvim", -- for file_selector provider telescope
+      "hrsh7th/nvim-cmp", -- autocompletion for avante commands and mentions
+      "ibhagwan/fzf-lua", -- for file_selector provider fzf
       "nvim-tree/nvim-web-devicons", -- or echasnovski/mini.icons
       "zbirenbaum/copilot.lua", -- for providers='copilot'
       {
@@ -198,10 +204,16 @@ return {
             drag_and_drop = {
               insert_mode = true,
             },
-            -- required for Windows users
-            use_absolute_path = true,
           },
         },
+      },
+      {
+        -- Make sure to set this up properly if you have lazy=true
+        "MeanderingProgrammer/render-markdown.nvim",
+        opts = {
+          file_types = { "markdown", "Avante" },
+        },
+        ft = { "markdown", "Avante" },
       },
     },
   },
@@ -241,7 +253,41 @@ return {
 
   -----------------------------------------------------------
   -- Development Tools
+
   -----------------------------------------------------------
+  -- Code screenshot tool
+  {
+    "krivahtoo/silicon.nvim",
+    build = "./install.sh",
+    cmd = "Silicon",
+    config = function()
+      require("silicon").setup {
+        font = "JetBrainsMono Nerd Font=14",
+        theme = "catppuccin-mocha",
+        background = "#1e1e2e",
+        pad_horiz = 80,
+        pad_vert = 60,
+        line_number = true,
+        line_pad = 2,
+        tab_width = 2,
+        round_corner = true,
+        window_controls = true,
+        watermark = {
+          text = "@supermaven",
+          color = "#6c7086",
+          style = "bold",
+        },
+        output = {
+          path = vim.fn.expand "~/Pictures/Screenshots",
+          format = "silicon_[year][month][day]_[hour][minute][second].png",
+        },
+      }
+    end,
+    keys = {
+      { "<leader>ss", ":Silicon<CR>", mode = "v", desc = "Screenshot code" },
+    },
+  },
+
   -- LazyGit integration
   {
     "kdheepak/lazygit.nvim",
