@@ -123,5 +123,17 @@ end
 
 -- Apply editor options
 for k, v in pairs(opt) do
-  vim.opt[k] = v
+  if k == "iskeyword" or k == "path" then
+    -- Handle list-type options that need special treatment
+    local current = vim.opt[k]:get()
+    if type(v) == "table" and v._append then
+      for _, item in ipairs(v._values) do
+        vim.opt[k]:append(item)
+      end
+    else
+      vim.opt[k] = v
+    end
+  else
+    vim.opt[k] = v
+  end
 end

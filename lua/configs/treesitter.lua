@@ -2,9 +2,6 @@
 -- Treesitter Configuration
 -----------------------------------------------------------
 
--- Register MDX as markdown for proper highlighting
-vim.treesitter.language.register("markdown", "mdx")
-
 -----------------------------------------------------------
 -- Custom Parser Configurations
 -----------------------------------------------------------
@@ -39,6 +36,12 @@ vim.filetype.add({
 -----------------------------------------------------------
 
 local opts = {
+    -- Configuration callback to register languages after setup
+    config = function()
+        -- Register MDX as markdown for proper highlighting
+        vim.treesitter.language.register("markdown", "mdx")
+    end,
+
     -- Languages to install
     ensure_installed = {
         -- System and Configuration
