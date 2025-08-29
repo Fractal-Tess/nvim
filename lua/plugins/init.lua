@@ -158,12 +158,16 @@ return {
       -- for example
       provider = "claude",
       auto_suggestions_provider = "claude",
-      claude = {
-        endpoint = "https://api.anthropic.com",
-        model = "claude-3-7-sonnet-latest",
-        temperature = 0,
-        max_tokens = 8192,
-        --reasoning_effort = "medium", -- low|medium|high, only used for reasoning models
+      providers = {
+        claude = {
+          endpoint = "https://api.anthropic.com",
+          model = "claude-3-7-sonnet-latest",
+          extra_request_body = {
+            temperature = 0,
+            max_tokens = 8192,
+            --reasoning_effort = "medium", -- low|medium|high, only used for reasoning models
+          },
+        },
       },
       mappings = {
         suggestion = {
